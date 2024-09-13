@@ -1,11 +1,12 @@
 import { createInterface } from 'readline';
-import generateMeta from './controllers/openaiController.js';
+import { generateMeta, generateImage } from './controllers/openaiController.js';
 const rl = createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-rl.question('YouTube Video Title: \n', generateMeta);
+// rl.question('YouTube Video Title: \n', generateMeta);
+rl.question('Describe your video thumbnail: \n', generateImage);
 
 
 
