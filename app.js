@@ -1,26 +1,15 @@
-import { createInterface } from 'readline';
+import express from 'express';
 import { generateMeta, generateImage } from './controllers/openaiController.js';
-const rl = createInterface({
-    input: process.stdin,
-    output: process.stdout
+
+const app = express()
+app.listen(4000, () => console.log('listening for req on 4000'));
+
+app.use(express.json())
+
+app.get("/", (req, res) => {
+    res.send("hello");
 });
 
-// rl.question('YouTube Video Title: \n', generateMeta);
-rl.question('Describe your video thumbnail: \n', generateImage);
+app.post('/viGen/meta', generateMeta)
+app.post('/viGen/image', generateImage)
 
-
-
-// import openai from './config/openaiConfig.js';
-
-// async function main() {
-//   const completion = await openai.chat.completions.create({
-//     messages: [{"role": "system", "content": "You are a helpful assistant."},
-//         {"role": "user", "content": "Who won the world series in 2020?"},
-//         {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-//         {"role": "user", "content": "Where was it played?"}],
-//     model: "gpt-4o-mini",
-//   });
-
-//   console.log(completion.choices[0]);
-// }
-// main();
